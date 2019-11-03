@@ -1,7 +1,7 @@
-import Home from './Home/Home'
-import Profile from './Profile/Profile'
+import ActiveList from './ActiveList/ActiveList.container'
+import ArchivedList from './ArchivedList/ArchivedList.container'
 
 export {
-  Home,
-  Profile
+  ActiveList,
+  ArchivedList
 }
