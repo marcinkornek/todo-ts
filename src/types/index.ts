@@ -11,12 +11,14 @@ export interface NavigationRouteProps {
 
 export type TodoItemType = {
   name: string;
+  key: string;
   isCompleted: boolean;
   createdAt: Date;
 }
 
 export type TodoListType = {
   name: string;
+  key: string;
   isArchived: boolean;
   items: TodoItemType[];
   createdAt: Date;
@@ -27,23 +29,31 @@ export type TodosStateType = {
   items: TodoListType[];
 }
 
-export interface TodosAddTodoListType extends Action {
+export interface AddTodoListType extends Action {
   type: todosTypes.ADD_TODO_LIST;
   payload: {
     name: string;
   };
 }
 
-export interface TodosAddTodoItemType extends Action {
+export interface AddTodoItemType extends Action {
   type: todosTypes.ADD_TODO_ITEM;
   payload: {
     name: string;
   };
 }
 
+export interface ToggleTodoListType extends Action {
+  type: todosTypes.TOGGLE_TODO_LIST;
+  payload: {
+    key: string;
+  };
+}
+
 export type TodosActionType =
-  | TodosAddTodoListType
-  | TodosAddTodoItemType
+  | AddTodoListType
+  | AddTodoItemType
+  | ToggleTodoListType
 
 export type AppStateType = TodosStateType
 export type AppActionType = TodosActionType

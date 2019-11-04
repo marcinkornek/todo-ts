@@ -1,6 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
+import {Icon} from 'native-base';
 import {TodoItemType} from 'types'
+import styles from './TodoItem.styles'
 
 interface Props {
   onPress: Function;
@@ -16,9 +18,10 @@ const TodoItem = ({ onPress, item }: Props) => {
     <TouchableOpacity
       onPress={handleOnPress}
       key={item.id || item.name}
+      style={styles.container}
     >
       <Text>{name}</Text>
-      <Text>{`completed: ${isCompleted ? 'true' : 'false'}`}</Text>
+      {isCompleted && <Icon name="checkmark"/>}
     </TouchableOpacity>
   );
 };
