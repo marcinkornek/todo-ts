@@ -1,6 +1,11 @@
 import {TodosStateType, TodosActionType} from 'types'
 import * as types from './types'
 
+const initialList = {
+  isArchived: false,
+  items: []
+}
+
 export const initialState: TodosStateType = {
   items: [
     {
@@ -57,9 +62,16 @@ export const initialState: TodosStateType = {
 export const todosReducer = (state = initialState, action: TodosActionType) => {
   switch (action.type) {
     case types.ADD_TODO_LIST:
+      const {key, name} = action.payload
+      const newList = {
+        ...initialList,
+        name,
+        key
+      }
+
       return {
         ...state,
-        items: [...state.items, action.todo]
+        items: [...state.items, newList]
       }
     case types.ADD_TODO_ITEM:
       return {

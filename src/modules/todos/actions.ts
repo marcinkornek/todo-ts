@@ -1,8 +1,9 @@
 import * as types from './types'
 
-const addTodoList = (name: string) => ({
+const addTodoList = (key: string, name: string) => ({
   type: types.ADD_TODO_LIST,
   payload: {
+    key,
     name
   },
 })

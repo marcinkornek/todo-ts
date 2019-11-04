@@ -6,15 +6,16 @@ import {TodoItem, ListSeparator} from 'components'
 type Props = NavigationRouteProps & TodoItemType
 
 const ArchivedList = ({ navigation, route, todos, toggleTodoList }: Props) => {
-  const handleOnPress = (item: TodoItemType) => {
-    console.log('handleOnPress', item)
+  const handleUnarchiveItem = (item: TodoItemType) => {
     toggleTodoList(item.key)
   }
 
   const renderItem = ({ item }: TodoItemType) => (
     <TodoItem
       item={item}
-      onPress={handleOnPress}
+      onPress={() => {}}
+      onPressButton={handleUnarchiveItem}
+      isArchived
     />
   )
 

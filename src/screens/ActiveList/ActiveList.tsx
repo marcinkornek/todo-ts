@@ -1,27 +1,39 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
+import UUIDGenerator from 'react-native-uuid-generator';
 import {NavigationRouteProps, TodoItemType} from 'types'
 import {TodoItem, ListSeparator, ListInput} from 'components'
 
 type Props = NavigationRouteProps & TodoItemType
 
-const ActiveList = ({ navigation, route, todos, toggleTodoList }: Props) => {
-  const handleOnPress = (item: TodoItemType) => {
+const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: Props) => {
+  const handleOpenList = (item: TodoItemType) => {
+    console.log('handleOnPress', item)
+  }
+
+  const handleArchiveItem = (item: TodoItemType) => {
     console.log('handleOnPress', item)
     toggleTodoList(item.key)
+  }
+
+  const handleAddList = async (text: string) => {
+    const key = await UUIDGenerator.getRandomUUID();
+    addTodoList(key, text)
   }
 
   const renderItem = ({ item }: TodoItemType) => (
     <TodoItem
       item={item}
-      onPress={handleOnPress}
+      onPress={handleOpenList}
+      onPressButton={handleArchiveItem}
+      isArchived={false}
     />
   )
 
   const renderListSeparator = () => <ListSeparator />
 
   const renderFooterComponent = () => (
-    <ListInput onSubmit={(text: string) => {console.log('add list', text)}} />
+    <ListInput onSubmit={(text: string) => handleAddList(text)} />
   )
 
   return (

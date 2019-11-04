@@ -6,22 +6,25 @@ import styles from './TodoItem.styles'
 
 interface Props {
   onPress: Function;
+  onPressButton: Function;
   item: TodoItemType
 }
 
-const TodoItem = ({ onPress, item }: Props) => {
+const TodoItem = ({ onPress, onPressButton, item }: Props) => {
   const { name, isCompleted } = item
 
-  const handleOnPress = () => onPress(item)
+  const handleRowPress = () => onPress(item)
+
+  const handleButtonPress = () => onPressButton(item)
 
   return (
     <TouchableOpacity
-      onPress={handleOnPress}
+      onPress={handleRowPress}
       key={item.id || item.name}
       style={styles.container}
     >
       <Text>{name}</Text>
-      {isCompleted && <Icon name="checkmark"/>}
+      {isCompleted && <Icon name="checkmark" onPress={handleButtonPress}/>}
     </TouchableOpacity>
   );
 };

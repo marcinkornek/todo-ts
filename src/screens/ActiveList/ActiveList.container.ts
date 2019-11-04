@@ -9,7 +9,8 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 const mapDispatchToProps = {
-  toggleTodoList: todosActions.toggleTodoList
+  toggleTodoList: todosActions.toggleTodoList,
+  addTodoList: todosActions.addTodoList
 }
 
 const ActiveListContainer = compose(
