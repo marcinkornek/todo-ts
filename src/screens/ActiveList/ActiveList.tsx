@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types'
-import {TodoItem, ListSeparator} from 'components'
+import {TodoItem, ListSeparator, ListInput} from 'components'
 
 type Props = NavigationRouteProps & TodoItemType
 
@@ -20,6 +20,10 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList }: Props) => {
 
   const renderListSeparator = () => <ListSeparator />
 
+  const renderFooterComponent = () => (
+    <ListInput onSubmit={(text: string) => {console.log('add list', text)}} />
+  )
+
   return (
     <View style={styles.container}>
       <Text>ActiveList</Text>
@@ -27,6 +31,7 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList }: Props) => {
         data={todos}
         renderItem={renderItem}
         ItemSeparatorComponent={renderListSeparator}
+        ListFooterComponent={renderFooterComponent}
       />
       <Button
         title="Go to Archived list"
