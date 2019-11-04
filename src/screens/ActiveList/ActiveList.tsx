@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
 import UUIDGenerator from 'react-native-uuid-generator';
 import {NavigationRouteProps, TodoItemType} from 'types'
-import {TodoItem, ListSeparator, ListInput} from 'components'
+import {ListItem, ListSeparator, ListInput} from 'components'
 
 type Props = NavigationRouteProps & TodoItemType
 
@@ -22,7 +22,7 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
   }
 
   const renderItem = ({ item }: TodoItemType) => (
-    <TodoItem
+    <ListItem
       item={item}
       onPress={handleOpenList}
       onPressButton={handleArchiveItem}
