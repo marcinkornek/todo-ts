@@ -1,14 +1,14 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
-import UUIDGenerator from 'react-native-uuid-generator';
 import {NavigationRouteProps, TodoItemType} from 'types'
 import {ListItem, ListSeparator, ListInput} from 'components'
+import {helpers} from 'utils'
 
 type Props = NavigationRouteProps & TodoItemType
 
 const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: Props) => {
   const handleOpenList = (item: TodoItemType) => {
-    console.log('handleOnPress', item)
+    navigation.navigate('TodosList', { key: item.key })
   }
 
   const handleArchiveItem = (item: TodoItemType) => {
@@ -17,7 +17,7 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
   }
 
   const handleAddList = async (text: string) => {
-    const key = await UUIDGenerator.getRandomUUID();
+    const key = await helpers.generateKey();
     addTodoList(key, text)
   }
 
