@@ -12,7 +12,6 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
   }
 
   const handleArchiveItem = (item: TodoItemType) => {
-    console.log('handleOnPress', item)
     toggleTodoList(item.key)
   }
 
