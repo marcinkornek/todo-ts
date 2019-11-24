@@ -1,17 +1,29 @@
 import {createSelector} from 'reselect'
-import {TodoItemType} from 'types'
+import createCachedSelector from 're-reselect';
+import {TodoItemType, TodoListType, AppStateType} from 'types'
 
-const itemsSelector = state => state.todos.items
+const todoListsSelector = (state: AppStateType, _key: string) => state.todos.items
+
+const listKey = (_state: AppStateType, key: string) => key
 
 const activeTodos = createSelector(
-  itemsSelector, items => items.filter((i: TodoItemType) => !i.isArchived)
+  todoListsSelector, (todos: TodoListType[]) => todos.filter((i: TodoItemType) => !i.isArchived)
 )
 
 const archivedTodos = createSelector(
-  itemsSelector, items => items.filter((i: TodoItemType) => i.isArchived)
+  todoListsSelector, (todos: TodoListType[]) => todos.filter((i: TodoItemType) => i.isArchived)
+)
+
+const todosByKey = createCachedSelector(
+  activeTodos,
+  listKey,
+  (todos: TodoListType[], key: string) => todos.find((t: TodoItemType) => t.key === key).items
+)(
+  (state, key) => key
 )
 
 export {
   activeTodos,
   archivedTodos,
+  todosByKey
 }

@@ -4,10 +4,15 @@ import styles from './ListInput.styles'
 
 type Props = {
   onSubmit: Function,
-  value?: string
+  value?: string,
+  placeholder?: string
 }
 
-const ListInput = ({ onSubmit, value }: Props) => {
+const ListInput = ({
+  onSubmit,
+  value = '',
+  placeholder = "Add new list..."
+}: Props) => {
   const [text, setText] = useState(value)
 
   const handleSubmit = () => {
@@ -20,7 +25,7 @@ const ListInput = ({ onSubmit, value }: Props) => {
         style={styles.input}
         value={text}
         onChangeText={t => setText(t)}
-        placeholder="Add new list..."
+        placeholder={placeholder}
       />
       {!!text.length ? (
         <Button
@@ -31,9 +36,5 @@ const ListInput = ({ onSubmit, value }: Props) => {
     </View>
   );
 };
-
-ListInput.defaultProps = {
-  value: ''
-}
 
 export default ListInput;

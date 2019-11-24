@@ -1,4 +1,4 @@
-import {TodosStateType, TodosActionType} from 'types'
+import {TodosStateType, TodosActionType, TodoListType, TodoItemType} from 'types'
 import * as types from './types'
 
 const initialList = {
@@ -81,17 +81,67 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
     case types.TOGGLE_TODO_LIST:
       return {
         ...state,
-        items: state.items.map(i => {
+        items: state.items.map((i: TodoListType) => {
           if (i.key === action.payload.key) {
             return ({
               ...i,
               isArchived: !i.isArchived
             })
           }
+        return i
+      })}
+    case types.ADD_TODO:
+      return {
+        ...state,
+        items: state.items.map((i: TodoListType) => {
+          if (i.key === action.payload.listKey) {
+            return ({
+              ...i,
+              items: [
+                ...i.items,
+                {
+                  name: action.payload.name,
+                  key: action.payload.key,
+                  isCompleted: false
+                }
+              ]
+            })
+          }
+        return i
+      })}
+    case types.UPDATE_TODO:
+      return {
+        ...state,
+        items: state.items.map((i: TodoListType) => {
+          if (i.key === action.payload.listKey) {
+            return ({
+              ...i,
+              items: i.items.map((t: TodoItemType) => {
+                if (t.key === action.payload.key) {
+                  return ({
+                    ...t,
+                    name: action.payload.name
+                  })
+                }
 
-          return i
-        })
-      }
+                return t
+              })
+            })
+          }
+        return i
+      })}
+    case types.DELETE_TODO:
+      return {
+        ...state,
+        items: state.items.map((i: TodoListType) => {
+          if (i.key === action.payload.listKey) {
+            return ({
+              ...i,
+              items: i.items.filter((t: TodoItemType) => t.key !== action.payload.key)
+            })
+          }
+        return i
+      })}
     default:
       return state
   }

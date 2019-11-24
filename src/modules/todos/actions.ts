@@ -22,8 +22,37 @@ const toggleTodoList = (key: string) => ({
   },
 })
 
+const addTodo = (listKey: string, key: string, name: string) => ({
+  type: types.ADD_TODO,
+  payload: {
+    listKey,
+    key,
+    name
+  },
+})
+
+const updateTodo = (listKey: string, key: string, name: string) => ({
+  type: types.UPDATE_TODO,
+  payload: {
+    listKey,
+    key,
+    name
+  },
+})
+
+const deleteTodo = (listKey: string, key: string) => ({
+  type: types.DELETE_TODO,
+  payload: {
+    listKey,
+    key,
+  },
+})
+
 export {
   addTodoList,
   addTodoItem,
   toggleTodoList,
+  addTodo,
+  updateTodo,
+  deleteTodo
 }
