@@ -9,9 +9,21 @@ function RootNavigator() {
   return (
     <NavigationNativeContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ActiveList" component={ActiveList} />
-        <Stack.Screen name="ArchivedList" component={ArchivedList} />
-        <Stack.Screen name="TodosList" component={TodosList} />
+        <Stack.Screen
+          name="ActiveList"
+          component={ActiveList}
+          options={{ title: 'Active' }}
+        />
+        <Stack.Screen
+          name="ArchivedList"
+          component={ArchivedList}
+          options={{ title: 'Archived' }}
+        />
+        <Stack.Screen
+          name="TodosList"
+          component={TodosList}
+          options={({ route }) => ({ title: route.params.title })}
+        />
       </Stack.Navigator>
     </NavigationNativeContainer>
   );

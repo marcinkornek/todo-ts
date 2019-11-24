@@ -8,7 +8,7 @@ type Props = NavigationRouteProps & TodoItemType
 
 const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: Props) => {
   const handleOpenList = (item: TodoItemType) => {
-    navigation.navigate('TodosList', { key: item.key })
+    navigation.navigate('TodosList', { title: item.name, key: item.key })
   }
 
   const handleArchiveItem = (item: TodoItemType) => {
