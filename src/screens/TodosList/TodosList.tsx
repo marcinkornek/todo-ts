@@ -39,7 +39,6 @@ const TodosList = ({ navigation, route, listKey, todos, addTodo, updateTodo, del
 
   return (
     <View style={styles.container}>
-      <Text>TodosList</Text>
       <FlatList
         data={todos}
         renderItem={renderItem}

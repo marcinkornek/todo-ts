@@ -23,7 +23,6 @@ const ArchivedList = ({ navigation, route, todos, toggleTodoList }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text>ArchivedList</Text>
       <FlatList
         data={todos}
         renderItem={renderItem}

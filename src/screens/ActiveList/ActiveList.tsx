@@ -37,7 +37,6 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
 
   return (
     <View style={styles.container}>
-      <Text>ActiveList</Text>
       <FlatList
         data={todos}
         renderItem={renderItem}
