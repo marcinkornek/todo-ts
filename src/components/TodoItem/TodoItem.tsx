@@ -20,7 +20,13 @@ const TodoItem = ({ onToggle, onUpdate, onDelete, item }: Props) => {
   const handleCompletePress = () => onToggle(item.key)
 
   const handleEditPress = () => {
-    if (isCompleted) return helpers.alert('You can only edit not completed todos')
+    if (isCompleted) {
+      return (
+        helpers.warningAlert({
+          title: 'You can only edit not completed todos'
+        })
+      )
+    }
 
     setIsEditing(true)
   }

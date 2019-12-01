@@ -11,8 +11,14 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
     navigation.navigate('TodosList', { title: item.name, key: item.key })
   }
 
+  const archiveTodo = (key: string) => toggleTodoList(key)
+
   const handleArchiveItem = (item: TodoItemType) => {
-    toggleTodoList(item.key)
+    helpers.confirmationAlert({
+      title: "Are you sure?",
+      message: `Do you want to archive todo list: ${item.name}?`,
+      onPressOk: () => archiveTodo(item.key)
+    })
   }
 
   const handleAddList = async (text: string) => {
