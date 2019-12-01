@@ -2,11 +2,6 @@ import produce from "immer"
 import {TodosStateType, TodosActionType, TodoListType, TodoItemType} from 'types'
 import * as types from './types'
 
-const initialList = {
-  isArchived: false,
-  items: []
-}
-
 export const initialState: TodosStateType = {
   items: [
     {
@@ -63,96 +58,61 @@ export const initialState: TodosStateType = {
 export const todosReducer = (state = initialState, action: TodosActionType) => {
   return produce(state, draft => {
     switch (action.type) {
+      // LISTS
       case types.ADD_TODO_LIST:
         const {key, name} = action.payload
         const newList = {
-          ...initialList,
+          key,
           name,
-          key
+          isArchived: false,
+          items: []
         }
         draft.items = [...draft.items, newList]
         break;
-      case types.TOGGLE_TODO_LIST:
-        draft.items = draft.items.map((i: TodoListType) => {
-          if (i.key === action.payload.key) {
-            return ({
-              ...i,
-              isArchived: !i.isArchived
-            })
-          }
+      case types.TOGGLE_TODO_LIST: {
+        const {key} = action.payload
+        const index = draft.items.findIndex((i: TodoListType) => i.key === key)
+        const isArchived = draft.items[index].isArchived
 
-          return i
-        })
-        break
-      case types.ADD_TODO:
-        draft.items = draft.items.map((i: TodoListType) => {
-          if (i.key === action.payload.listKey) {
-            return ({
-              ...i,
-              items: [
-                ...i.items,
-                {
-                  name: action.payload.name,
-                  key: action.payload.key,
-                  isCompleted: false
-                }
-              ]
-            })
-          }
-          return i
-        })
+        draft.items[index].isArchived = !isArchived
         break;
-      case types.TOGGLE_TODO:
-        draft.items = draft.items.map((i: TodoListType) => {
-          if (i.key === action.payload.listKey) {
-            return ({
-              ...i,
-              items: i.items.map((t: TodoItemType) => {
-                if (t.key === action.payload.key) {
-                  return ({
-                    ...t,
-                    isCompleted: !t.isCompleted
-                  })
-                }
+      }
+      // ITEMS
+      case types.ADD_TODO: {
+        const {listKey, key, name} = action.payload
+        const index = draft.items.findIndex((i: TodoListType) => i.key === listKey)
+        const todos = draft.items[index].items
+        const newTodo = {
+          key,
+          name,
+          isCompleted: false
+        }
+        draft.items[index].items = [...todos, newTodo]
+        break;
+      }
+      case types.TOGGLE_TODO: {
+        const {listKey, key} = action.payload
+        const listIndex = draft.items.findIndex((i: TodoListType) => i.key === listKey)
+        const todoIndex = draft.items[listIndex].items.findIndex((i: TodoItemType) => i.key === key)
+        const isCompleted = draft.items[listIndex].items[todoIndex].isCompleted
 
-                return t
-              })
-            })
-          }
-          return i
-        })
+        draft.items[listIndex].items[todoIndex].isCompleted = !isCompleted
         break;
-      case types.UPDATE_TODO:
-        draft.items = draft.items.map((i: TodoListType) => {
-          if (i.key === action.payload.listKey) {
-            return ({
-              ...i,
-              items: i.items.map((t: TodoItemType) => {
-                if (t.key === action.payload.key) {
-                  return ({
-                    ...t,
-                    name: action.payload.name
-                  })
-                }
+      }
+      case types.UPDATE_TODO: {
+        const {listKey, key, name} = action.payload
+        const listIndex = draft.items.findIndex((i: TodoListType) => i.key === listKey)
+        const todoIndex = draft.items[listIndex].items.findIndex((i: TodoItemType) => i.key === key)
 
-                return t
-              })
-            })
-          }
-          return i
-        })
+        draft.items[listIndex].items[todoIndex].name = name
         break;
-      case types.DELETE_TODO:
-        draft.items = draft.items.map((i: TodoListType) => {
-          if (i.key === action.payload.listKey) {
-            return ({
-              ...i,
-              items: i.items.filter((t: TodoItemType) => t.key !== action.payload.key)
-            })
-          }
-          return i
-        })
+      }
+      case types.DELETE_TODO: {
+        const {listKey, key} = action.payload
+        const listIndex = draft.items.findIndex((i: TodoListType) => i.key === listKey)
+        draft.items[listIndex].items = draft.items[listIndex].items.filter((t: TodoItemType) => t.key !== key)
         break;
+      }
       default:
         return state
     }
