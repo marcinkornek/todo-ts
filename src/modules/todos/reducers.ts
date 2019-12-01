@@ -1,3 +1,4 @@
+import produce from "immer"
 import {TodosStateType, TodosActionType, TodoListType, TodoItemType} from 'types'
 import * as types from './types'
 
@@ -60,40 +61,34 @@ export const initialState: TodosStateType = {
 }
 
 export const todosReducer = (state = initialState, action: TodosActionType) => {
-  switch (action.type) {
-    case types.ADD_TODO_LIST:
-      const {key, name} = action.payload
-      const newList = {
-        ...initialList,
-        name,
-        key
-      }
-
-      return {
-        ...state,
-        items: [...state.items, newList]
-      }
-    case types.ADD_TODO_ITEM:
-      return {
-        ...state,
-        items: [...state.items, action.todo]
-      }
-    case types.TOGGLE_TODO_LIST:
-      return {
-        ...state,
-        items: state.items.map((i: TodoListType) => {
+  return produce(state, draft => {
+    switch (action.type) {
+      case types.ADD_TODO_LIST:
+        const {key, name} = action.payload
+        const newList = {
+          ...initialList,
+          name,
+          key
+        }
+        draft.items = [...draft.items, newList]
+        break;
+      case types.ADD_TODO_ITEM:
+        draft.items = [...draft.items, action.todo]
+        break;
+      case types.TOGGLE_TODO_LIST:
+        draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.key) {
             return ({
               ...i,
               isArchived: !i.isArchived
             })
           }
-        return i
-      })}
-    case types.ADD_TODO:
-      return {
-        ...state,
-        items: state.items.map((i: TodoListType) => {
+
+          return i
+        })
+        break
+      case types.ADD_TODO:
+        draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.listKey) {
             return ({
               ...i,
@@ -107,17 +102,11 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
               ]
             })
           }
-        return i
-      })}
-    case types.TOGGLE_TODO:
-      console.log('====================================');
-      console.log('TOGGLE_TODO', action);
-      console.log('TOGGLE_TODO', state.items);
-      console.log('====================================');
-
-      return {
-        ...state,
-        items: state.items.map((i: TodoListType) => {
+          return i
+        })
+        break;
+      case types.TOGGLE_TODO:
+        draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.listKey) {
             return ({
               ...i,
@@ -133,12 +122,11 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
               })
             })
           }
-        return i
-      })}
-    case types.UPDATE_TODO:
-      return {
-        ...state,
-        items: state.items.map((i: TodoListType) => {
+          return i
+        })
+        break;
+      case types.UPDATE_TODO:
+        draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.listKey) {
             return ({
               ...i,
@@ -154,24 +142,25 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
               })
             })
           }
-        return i
-      })}
-    case types.DELETE_TODO:
-      return {
-        ...state,
-        items: state.items.map((i: TodoListType) => {
+          return i
+        })
+        break;
+      case types.DELETE_TODO:
+        draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.listKey) {
             return ({
               ...i,
               items: i.items.filter((t: TodoItemType) => t.key !== action.payload.key)
             })
           }
-        return i
-      })}
-    default:
-      return state
+          return i
+        })
+        break;
+      default:
+        return state
+    }
   }
-}
+)}
 
 const reducer = {
   todos: todosReducer,
