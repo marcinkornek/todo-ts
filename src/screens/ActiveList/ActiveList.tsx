@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types'
-import {ListItem, ListSeparator, ListInput} from 'components'
+import {ListItem, ListSeparator, ListInput, Spacer} from 'components'
 import {helpers} from 'utils'
 
 type Props = NavigationRouteProps & TodoItemType
@@ -38,7 +38,10 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
   const renderListSeparator = () => <ListSeparator />
 
   const renderFooterComponent = () => (
-    <ListInput onSubmit={(text: string) => handleAddList(text)} />
+    <>
+      <Spacer />
+      <ListInput onSubmit={(text: string) => handleAddList(text)} />
+    </>
   )
 
   return (

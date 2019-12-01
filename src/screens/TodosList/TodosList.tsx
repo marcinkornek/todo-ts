@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types'
-import {TodoItem, ListSeparator, ListInput} from 'components'
+import {TodoItem, ListSeparator, ListInput, Spacer} from 'components'
 import {helpers} from 'utils'
 
 type Props = NavigationRouteProps & TodoItemType
@@ -46,10 +46,13 @@ const TodosList = ({
   const renderListSeparator = () => <ListSeparator />
 
   const renderFooterComponent = () => (
-    <ListInput
-      onSubmit={(text: string) => handleAddTodo(text)}
-      placeholder="Add new todo..."
-    />
+    <>
+      <Spacer/>
+      <ListInput
+        onSubmit={(text: string) => handleAddTodo(text)}
+        placeholder="Add new todo..."
+      />
+    </>
   )
 
   return (
