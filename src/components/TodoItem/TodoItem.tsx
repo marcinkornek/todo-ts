@@ -1,32 +1,58 @@
-import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import React, {useState} from 'react';
+import {TouchableOpacity, Text, TextInput, View} from 'react-native';
 import {Icon} from 'native-base';
+import ListInput from '../ListInput/ListInput';
 import {TodoItemType} from 'types'
+import {helpers} from 'utils'
 import styles from './TodoItem.styles'
 
 interface Props {
-  onPress: Function;
-  onPressButton: Function;
+  onToggle: Function;
+  onUpdate: Function;
+  onDelete: Function;
   item: TodoItemType
 }
 
-const TodoItem = ({ onPress, onPressButton, item }: Props) => {
+const TodoItem = ({ onToggle, onUpdate, onDelete, item }: Props) => {
   const { name, isCompleted } = item
+  const [isEditing, setIsEditing] = useState(false)
 
-  const handleRowPress = () => onPress(item)
+  const handleCompletePress = () => onToggle(item.key)
 
-  const handleButtonPress = () => onPressButton(item)
+  const handleEditPress = () => {
+    if (isCompleted) return helpers.alert('You can only edit not completed todos')
 
-  return (
+    setIsEditing(true)
+  }
+
+  const updateTodo = (text: string) => {
+    onUpdate(item.key, text)
+    setIsEditing(false)
+  }
+
+  const handleDeletePress = () => onDelete(item.key)
+
+  const viewTodo = () => (
     <TouchableOpacity
-      onPress={handleRowPress}
+      onPress={handleCompletePress}
       key={item.id || item.name}
       style={styles.container}
     >
-      <Text>{name}</Text>
-      {isCompleted && <Icon name="checkmark" onPress={handleButtonPress}/>}
+      <Text style={[styles.text, isCompleted && styles.textCompleted]}>{name}</Text>
+      <View style={styles.actionButtons}>
+        <Icon name="create" onPress={handleEditPress}/>
+        <Icon name="trash" onPress={handleDeletePress}/>
+      </View>
     </TouchableOpacity>
-  );
+  )
+
+  const editTodo = () => (
+    <>
+      <ListInput value={name} onSubmit={updateTodo}/>
+    </>
+  )
+
+  return isEditing ? editTodo() : viewTodo();
 };
 
 export default TodoItem;

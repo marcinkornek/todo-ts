@@ -16,6 +16,7 @@ const mapStateToProps = (state: AppStateType, ownProps: NavigationRouteProps) =>
 
 const mapDispatchToProps = {
   addTodo: todosActions.addTodo,
+  toggleTodo: todosActions.toggleTodo,
   updateTodo: todosActions.updateTodo,
   deleteTodo: todosActions.deleteTodo
 }

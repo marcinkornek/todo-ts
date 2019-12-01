@@ -3,9 +3,9 @@ import {View, TextInput, Button} from 'react-native';
 import styles from './ListInput.styles'
 
 type Props = {
-  onSubmit: Function,
-  value?: string,
-  placeholder?: string
+  onSubmit: Function;
+  value?: string;
+  placeholder?: string;
 }
 
 const ListInput = ({

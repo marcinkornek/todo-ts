@@ -9,6 +9,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 8
+  },
+  actionButtons: {
+    flexDirection: 'row',
+  },
+  text: {
+
+  },
+  textCompleted: {
+    textDecorationLine: 'line-through'
   }
 })
 

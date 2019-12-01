@@ -1,19 +1,32 @@
 import React from 'react';
-import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types'
-import {ListItem, ListSeparator, ListInput} from 'components'
+import {TodoItem, ListSeparator, ListInput} from 'components'
 import {helpers} from 'utils'
 
 type Props = NavigationRouteProps & TodoItemType
 
-const TodosList = ({ navigation, route, listKey, todos, addTodo, updateTodo, deleteTodo }: Props) => {
+const TodosList = ({
+  navigation,
+  route,
+  listKey,
+  todos,
+  addTodo,
+  toggleTodo,
+  updateTodo,
+  deleteTodo
+}: Props) => {
   const handleAddTodo = async (text: string) => {
     const key = await helpers.generateKey();
 
     addTodo(listKey, key, text)
   }
 
-  const handleEditTodo = (key: string, text: string) => {
+  const handleToggleTodo = (key: string) => {
+    toggleTodo(listKey, key)
+  }
+
+  const handleUpdateTodo = (key: string, text: string) => {
     updateTodo(listKey, key, text)
   }
 
@@ -22,9 +35,11 @@ const TodosList = ({ navigation, route, listKey, todos, addTodo, updateTodo, del
   }
 
   const renderItem = ({ item }: TodoItemType) => (
-    <ListItem
+    <TodoItem
       item={item}
-      onPress={() => {}}
+      onToggle={handleToggleTodo}
+      onUpdate={handleUpdateTodo}
+      onDelete={handleDeleteTodo}
     />
   )
 

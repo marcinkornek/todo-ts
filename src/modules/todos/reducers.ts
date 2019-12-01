@@ -109,6 +109,32 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
           }
         return i
       })}
+    case types.TOGGLE_TODO:
+      console.log('====================================');
+      console.log('TOGGLE_TODO', action);
+      console.log('TOGGLE_TODO', state.items);
+      console.log('====================================');
+
+      return {
+        ...state,
+        items: state.items.map((i: TodoListType) => {
+          if (i.key === action.payload.listKey) {
+            return ({
+              ...i,
+              items: i.items.map((t: TodoItemType) => {
+                if (t.key === action.payload.key) {
+                  return ({
+                    ...t,
+                    isCompleted: !t.isCompleted
+                  })
+                }
+
+                return t
+              })
+            })
+          }
+        return i
+      })}
     case types.UPDATE_TODO:
       return {
         ...state,

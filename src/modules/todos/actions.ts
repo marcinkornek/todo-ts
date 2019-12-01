@@ -31,6 +31,14 @@ const addTodo = (listKey: string, key: string, name: string) => ({
   },
 })
 
+const toggleTodo = (listKey: string, key: string) => ({
+  type: types.TOGGLE_TODO,
+  payload: {
+    listKey,
+    key
+  },
+})
+
 const updateTodo = (listKey: string, key: string, name: string) => ({
   type: types.UPDATE_TODO,
   payload: {
@@ -53,6 +61,7 @@ export {
   addTodoItem,
   toggleTodoList,
   addTodo,
+  toggleTodo,
   updateTodo,
   deleteTodo
 }

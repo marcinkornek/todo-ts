@@ -4,10 +4,10 @@ import {Icon} from 'native-base';
 import {TodoItemType} from 'types'
 import styles from './ListItem.styles'
 
-interface Props {
+type Props = {
   onPress: Function;
   onPressButton: Function;
-  item: TodoItemType
+  item: TodoItemType;
 }
 
 const ListItem = ({ onPress, onPressButton, item }: Props) => {
