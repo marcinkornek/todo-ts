@@ -39,6 +39,7 @@
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.149",
     "@types/react-native": "^0.60.21",
+    "@types/react-native-uuid-generator": "^4.0.0",
     "@types/react-test-renderer": "16.9.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
