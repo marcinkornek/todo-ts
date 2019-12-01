@@ -72,9 +72,6 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
         }
         draft.items = [...draft.items, newList]
         break;
-      case types.ADD_TODO_ITEM:
-        draft.items = [...draft.items, action.todo]
-        break;
       case types.TOGGLE_TODO_LIST:
         draft.items = draft.items.map((i: TodoListType) => {
           if (i.key === action.payload.key) {
