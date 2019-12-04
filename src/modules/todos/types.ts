@@ -1,8 +1,9 @@
-export const ADD_TODO_LIST = 'todos/ADD_TODO_LIST'
-export const ADD_TODO_ITEM = 'todos/ADD_TODO_ITEM'
-export const TOGGLE_TODO_LIST = 'todos/TOGGLE_TODO_LIST'
-export const TOGGLE_TODO_ITEM = 'todos/TOGGLE_TODO_ITEM'
-export const ADD_TODO = 'todos/ADD_TODO'
-export const TOGGLE_TODO = 'todos/TOGGLE_TODO'
-export const UPDATE_TODO = 'todos/UPDATE_TODO'
-export const DELETE_TODO = 'todos/DELETE_TODO'
+// TodoList
+export const ADD_TODO_LIST = 'ADD_TODO_LIST'
+export const TOGGLE_TODO_LIST = 'TOGGLE_TODO_LIST'
+
+// TodoItem
+export const ADD_TODO = 'ADD_TODO'
+export const TOGGLE_TODO = 'TOGGLE_TODO'
+export const UPDATE_TODO = 'UPDATE_TODO'
+export const DELETE_TODO = 'DELETE_TODO'

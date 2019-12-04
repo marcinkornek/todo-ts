@@ -8,11 +8,13 @@ export const initialState: TodosStateType = {
       name: "list 1",
       key: '1',
       isArchived: false,
+      createdAt: new Date(2011, 11, 30),
       items: [
         {
           name: 'eggs',
           key: '11',
-          isCompleted: false
+          isCompleted: false,
+          createdAt: new Date(2011, 11, 30),
         }
       ]
     },
@@ -20,11 +22,13 @@ export const initialState: TodosStateType = {
       name: "list 2",
       key: '2',
       isArchived: false,
+      createdAt: new Date(2011, 11, 30),
       items: [
         {
           name: 'cheese',
           key: '21',
-          isCompleted: false
+          isCompleted: false,
+          createdAt: new Date(2011, 11, 30),
         }
       ]
     },
@@ -32,11 +36,13 @@ export const initialState: TodosStateType = {
       name: "archived list 1",
       key: '3',
       isArchived: true,
+      createdAt: new Date(2011, 11, 30),
       items: [
         {
           name: 'archived eggs',
           key: '31',
-          isCompleted: false
+          isCompleted: false,
+          createdAt: new Date(2011, 11, 30),
         }
       ]
     },
@@ -44,11 +50,13 @@ export const initialState: TodosStateType = {
       name: "archived list 2",
       key: '4',
       isArchived: true,
+      createdAt: new Date(2011, 11, 30),
       items: [
         {
           name: 'archived cheese',
           key: '41',
-          isCompleted: false
+          isCompleted: false,
+          createdAt: new Date(2011, 11, 30),
         }
       ]
     }
@@ -60,9 +68,9 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
     switch (action.type) {
       // LISTS
       case types.ADD_TODO_LIST:
-        const {key, name} = action.payload
+        const {listKey, name} = action.payload
         const newList = {
-          key,
+          key: listKey,
           name,
           isArchived: false,
           items: []
@@ -70,8 +78,8 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
         draft.items = [...draft.items, newList]
         break;
       case types.TOGGLE_TODO_LIST: {
-        const {key} = action.payload
-        const index = draft.items.findIndex((i: TodoListType) => i.key === key)
+        const {listKey} = action.payload
+        const index = draft.items.findIndex((i: TodoListType) => i.key === listKey)
         const isArchived = draft.items[index].isArchived
 
         draft.items[index].isArchived = !isArchived

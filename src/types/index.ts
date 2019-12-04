@@ -1,7 +1,6 @@
 import { ParamListBase, RouteProp } from "@react-navigation/core";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Action } from 'redux';
-import { todosTypes } from 'modules/todos';
 
 // react-navigation
 export interface NavigationRouteProps {
@@ -9,18 +8,22 @@ export interface NavigationRouteProps {
   navigation: StackNavigationProp<ParamListBase>;
 }
 
-export type TodoItemType = {
-  name: string;
-  key: string;
-  isCompleted: boolean;
-  createdAt: Date;
-}
+export type ItemKey = string;
+
+export type ListKey = string;
 
 export type TodoListType = {
   name: string;
-  key: string;
+  key: ListKey;
   isArchived: boolean;
   items: TodoItemType[];
+  createdAt: Date;
+}
+
+export type TodoItemType = {
+  name: string;
+  key: ItemKey;
+  isCompleted: boolean;
   createdAt: Date;
 }
 
@@ -30,30 +33,61 @@ export type TodosStateType = {
 }
 
 export interface AddTodoListType extends Action {
-  type: todosTypes.ADD_TODO_LIST;
+  type: 'ADD_TODO_LIST';
   payload: {
-    name: string;
-  };
-}
-
-export interface AddTodoItemType extends Action {
-  type: todosTypes.ADD_TODO_ITEM;
-  payload: {
-    name: string;
+    listKey: ListKey,
+    name: string
   };
 }
 
 export interface ToggleTodoListType extends Action {
-  type: todosTypes.TOGGLE_TODO_LIST;
+  type: 'TOGGLE_TODO_LIST';
   payload: {
-    key: string;
+    listKey: ListKey;
+  };
+}
+
+export interface AddTodoType extends Action {
+  type: 'ADD_TODO';
+  payload: {
+    listKey: ListKey;
+    key: ItemKey;
+    name: string
+  };
+}
+
+export interface ToggleTodoType extends Action {
+  type: 'TOGGLE_TODO';
+  payload: {
+    listKey: ListKey;
+    key: ItemKey;
+  };
+}
+
+export interface UpdateTodoType extends Action {
+  type: 'UPDATE_TODO';
+  payload: {
+    listKey: ListKey;
+    key: ItemKey;
+    name: string
+  };
+}
+
+export interface DeleteTodoType extends Action {
+  type: 'DELETE_TODO';
+  payload: {
+    listKey: ListKey;
+    key: ItemKey;
   };
 }
 
 export type TodosActionType =
   | AddTodoListType
-  | AddTodoItemType
   | ToggleTodoListType
+  | AddTodoType
+  | ToggleTodoType
+  | UpdateTodoType
+  | DeleteTodoType
 
 export type AppStateType = TodosStateType
 export type AppActionType = TodosActionType
