@@ -1,13 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import {Icon} from 'native-base';
-import {TodoItemType} from 'types'
+import {TodoListType} from 'types'
 import styles from './ListItem.styles'
 
 type Props = {
   onPress: Function;
   onPressButton: Function;
-  item: TodoItemType;
+  item: TodoListType;
 }
 
 const ListItem = ({ onPress, onPressButton, item }: Props) => {
@@ -20,7 +20,7 @@ const ListItem = ({ onPress, onPressButton, item }: Props) => {
   return (
     <TouchableOpacity
       onPress={handleRowPress}
-      key={item.id || item.name}
+      key={item.key || item.name}
       style={styles.container}
     >
       <Text>{name}</Text>

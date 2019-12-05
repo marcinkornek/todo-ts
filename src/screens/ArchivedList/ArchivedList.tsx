@@ -3,9 +3,12 @@ import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types'
 import {ListItem, ListSeparator} from 'components'
 
-type Props = NavigationRouteProps & TodoItemType
+type Props = NavigationRouteProps & {
+  todos: Array<TodoItemType>;
+  toggleTodoList: Function;
+}
 
-const ArchivedList = ({ navigation, route, todos, toggleTodoList }: Props) => {
+const ArchivedList = ({ navigation, todos, toggleTodoList }: Props) => {
   const handleUnarchiveItem = (item: TodoItemType) => {
     toggleTodoList(item.key)
   }
@@ -15,7 +18,6 @@ const ArchivedList = ({ navigation, route, todos, toggleTodoList }: Props) => {
       item={item}
       onPress={() => {}}
       onPressButton={handleUnarchiveItem}
-      isArchived
     />
   )
 

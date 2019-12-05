@@ -15,9 +15,7 @@ type AlertTypes = BaseAlertTypes & {
   buttons?: Array<AlertButtonType>
 }
 
-type WarningAlertTypes = BaseAlertTypes & {
-  onPressOk?: Function;
-}
+type WarningAlertTypes = BaseAlertTypes
 
 type ConfirmationAlertTypes = BaseAlertTypes & {
   onPressOk?: Function;

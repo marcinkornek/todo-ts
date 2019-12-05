@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 
 type Props = {
-  height: number;
+  height?: number;
 }
 
 const ListInput = ({

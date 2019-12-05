@@ -4,9 +4,13 @@ import {NavigationRouteProps, TodoItemType} from 'types'
 import {ListItem, ListSeparator, ListInput, Spacer} from 'components'
 import {helpers} from 'utils'
 
-type Props = NavigationRouteProps & TodoItemType
+type Props = NavigationRouteProps & {
+  todos: Array<TodoItemType>;
+  toggleTodoList: Function;
+  addTodoList: Function;
+}
 
-const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: Props) => {
+const ActiveList = ({ navigation, todos, toggleTodoList, addTodoList }: Props) => {
   const handleOpenList = (item: TodoItemType) => {
     navigation.navigate('TodosList', { title: item.name, key: item.key })
   }
@@ -31,7 +35,6 @@ const ActiveList = ({ navigation, route, todos, toggleTodoList, addTodoList }: P
       item={item}
       onPress={handleOpenList}
       onPressButton={handleArchiveItem}
-      isArchived={false}
     />
   )
 
