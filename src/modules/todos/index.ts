@@ -1,13 +1,9 @@
-import reducers from './reducers'
+import reducers from './reducers';
 
-import * as todosActions from './actions'
-import * as todosSelectors from './selectors'
-import * as todosTypes from './types'
+import * as todosActions from './actions';
+import * as todosSelectors from './selectors';
+import * as todosTypes from './types';
 
-export {
-  todosActions,
-  todosSelectors,
-  todosTypes,
-}
+export {todosActions, todosSelectors, todosTypes};
 
-export default reducers
+export default reducers;

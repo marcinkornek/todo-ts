@@ -1,27 +1,27 @@
 import React from 'react';
 import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
-import {NavigationRouteProps, TodoItemType} from 'types'
-import {ListItem, ListSeparator} from 'components'
+import {NavigationRouteProps, TodoItemType} from 'types';
+import {ListItem, ListSeparator} from 'components';
 
 type Props = NavigationRouteProps & {
   todos: Array<TodoItemType>;
   toggleTodoList: Function;
-}
+};
 
-const ArchivedList = ({ navigation, todos, toggleTodoList }: Props) => {
+const ArchivedList = ({navigation, todos, toggleTodoList}: Props) => {
   const handleUnarchiveItem = (item: TodoItemType) => {
-    toggleTodoList(item.key)
-  }
+    toggleTodoList(item.key);
+  };
 
-  const renderItem = ({ item }: TodoItemType) => (
+  const renderItem = ({item}: TodoItemType) => (
     <ListItem
       item={item}
       onPress={() => {}}
       onPressButton={handleUnarchiveItem}
     />
-  )
+  );
 
-  const renderListSeparator = () => <ListSeparator />
+  const renderListSeparator = () => <ListSeparator />;
 
   return (
     <View style={styles.container}>
@@ -35,14 +35,14 @@ const ArchivedList = ({ navigation, todos, toggleTodoList }: Props) => {
         onPress={() => navigation.navigate('ActiveList')}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  }
-})
+    backgroundColor: 'white',
+  },
+});
 
-export default ArchivedList
+export default ArchivedList;

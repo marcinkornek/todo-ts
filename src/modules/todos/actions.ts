@@ -1,46 +1,46 @@
-import { ItemKey, ListKey } from 'types'
-import * as types from './types'
+import {ItemKey, ListKey} from 'types';
+import * as types from './types';
 
 const addTodoList = (listKey: ListKey, name: string) => ({
   type: types.ADD_TODO_LIST,
   payload: {
     listKey,
-    name
+    name,
   },
-})
+});
 
 const toggleTodoList = (listKey: ListKey) => ({
   type: types.TOGGLE_TODO_LIST,
   payload: {
-    listKey
+    listKey,
   },
-})
+});
 
 const addTodo = (listKey: ListKey, key: ItemKey, name: string) => ({
   type: types.ADD_TODO,
   payload: {
     listKey,
     key,
-    name
+    name,
   },
-})
+});
 
 const toggleTodo = (listKey: ListKey, key: ItemKey) => ({
   type: types.TOGGLE_TODO,
   payload: {
     listKey,
-    key
+    key,
   },
-})
+});
 
 const updateTodo = (listKey: ListKey, key: ItemKey, name: string) => ({
   type: types.UPDATE_TODO,
   payload: {
     listKey,
     key,
-    name
+    name,
   },
-})
+});
 
 const deleteTodo = (listKey: ListKey, key: ItemKey) => ({
   type: types.DELETE_TODO,
@@ -48,7 +48,7 @@ const deleteTodo = (listKey: ListKey, key: ItemKey) => ({
     listKey,
     key,
   },
-})
+});
 
 export {
   addTodoList,
@@ -56,5 +56,5 @@ export {
   addTodo,
   toggleTodo,
   updateTodo,
-  deleteTodo
-}
+  deleteTodo,
+};

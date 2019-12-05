@@ -1,51 +1,56 @@
 import React from 'react';
 import {View, StyleSheet, Button, FlatList} from 'react-native';
-import {NavigationRouteProps, TodoItemType} from 'types'
-import {ListItem, ListSeparator, ListInput, Spacer} from 'components'
-import {helpers} from 'utils'
+import {NavigationRouteProps, TodoItemType} from 'types';
+import {ListItem, ListSeparator, ListInput, Spacer} from 'components';
+import {helpers} from 'utils';
 
 type Props = NavigationRouteProps & {
   todos: Array<TodoItemType>;
   toggleTodoList: Function;
   addTodoList: Function;
-}
+};
 
-const ActiveList = ({ navigation, todos, toggleTodoList, addTodoList }: Props) => {
+const ActiveList = ({
+  navigation,
+  todos,
+  toggleTodoList,
+  addTodoList,
+}: Props) => {
   const handleOpenList = (item: TodoItemType) => {
-    navigation.navigate('TodosList', { title: item.name, key: item.key })
-  }
+    navigation.navigate('TodosList', {title: item.name, key: item.key});
+  };
 
-  const archiveTodo = (key: string) => toggleTodoList(key)
+  const archiveTodo = (key: string) => toggleTodoList(key);
 
   const handleArchiveItem = (item: TodoItemType) => {
     helpers.confirmationAlert({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       message: `Do you want to archive todo list: ${item.name}?`,
-      onPressOk: () => archiveTodo(item.key)
-    })
-  }
+      onPressOk: () => archiveTodo(item.key),
+    });
+  };
 
   const handleAddList = async (text: string) => {
     const key = await helpers.generateKey();
-    addTodoList(key, text)
-  }
+    addTodoList(key, text);
+  };
 
-  const renderItem = ({ item }: TodoItemType) => (
+  const renderItem = ({item}: TodoItemType) => (
     <ListItem
       item={item}
       onPress={handleOpenList}
       onPressButton={handleArchiveItem}
     />
-  )
+  );
 
-  const renderListSeparator = () => <ListSeparator />
+  const renderListSeparator = () => <ListSeparator />;
 
   const renderFooterComponent = () => (
     <>
       <Spacer />
       <ListInput onSubmit={(text: string) => handleAddList(text)} />
     </>
-  )
+  );
 
   return (
     <View style={styles.container}>
@@ -60,14 +65,14 @@ const ActiveList = ({ navigation, todos, toggleTodoList, addTodoList }: Props) =
         onPress={() => navigation.navigate('ArchivedList')}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white'
-  }
-})
+    backgroundColor: 'white',
+  },
+});
 
-export default ActiveList
+export default ActiveList;

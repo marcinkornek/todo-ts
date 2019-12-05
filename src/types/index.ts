@@ -1,6 +1,6 @@
-import { ParamListBase, RouteProp } from "@react-navigation/core";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Action } from 'redux';
+import {ParamListBase, RouteProp} from '@react-navigation/core';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {Action} from 'redux';
 
 // react-navigation
 export interface NavigationRouteProps {
@@ -18,25 +18,25 @@ export type TodoListType = {
   isArchived: boolean;
   items: TodoItemType[];
   createdAt: Date;
-}
+};
 
 export type TodoItemType = {
   name: string;
   key: ItemKey;
   isCompleted: boolean;
   createdAt: Date;
-}
+};
 
 // REDUX
 export type TodosStateType = {
   items: TodoListType[];
-}
+};
 
 export interface AddTodoListType extends Action {
   type: 'ADD_TODO_LIST';
   payload: {
-    listKey: ListKey,
-    name: string
+    listKey: ListKey;
+    name: string;
   };
 }
 
@@ -52,7 +52,7 @@ export interface AddTodoType extends Action {
   payload: {
     listKey: ListKey;
     key: ItemKey;
-    name: string
+    name: string;
   };
 }
 
@@ -69,7 +69,7 @@ export interface UpdateTodoType extends Action {
   payload: {
     listKey: ListKey;
     key: ItemKey;
-    name: string
+    name: string;
   };
 }
 
@@ -87,7 +87,7 @@ export type TodosActionType =
   | AddTodoType
   | ToggleTodoType
   | UpdateTodoType
-  | DeleteTodoType
+  | DeleteTodoType;
 
-export type AppStateType = TodosStateType
-export type AppActionType = TodosActionType
+export type AppStateType = TodosStateType;
+export type AppActionType = TodosActionType;

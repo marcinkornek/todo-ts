@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,12 +7,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     borderWidth: 1,
     borderColor: 'gray',
-    borderRadius: 8
+    borderRadius: 8,
   },
   input: {
     flex: 1,
-    padding: 10
-  }
-})
+    padding: 10,
+  },
+});
 
-export default styles
+export default styles;

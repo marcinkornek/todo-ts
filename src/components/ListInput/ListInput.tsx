@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, Button} from 'react-native';
-import styles from './ListInput.styles'
+import styles from './ListInput.styles';
 
 type Props = {
   onSubmit: Function;
   value?: string;
   placeholder?: string;
-}
+};
 
 const ListInput = ({
   onSubmit,
   value = '',
-  placeholder = "Add new list..."
+  placeholder = 'Add new list...',
 }: Props) => {
-  const [text, setText] = useState(value)
+  const [text, setText] = useState(value);
 
   const handleSubmit = () => {
-    onSubmit(text)
-  }
+    onSubmit(text);
+  };
 
   return (
     <View style={styles.container}>
@@ -27,12 +27,7 @@ const ListInput = ({
         onChangeText={t => setText(t)}
         placeholder={placeholder}
       />
-      {!!text.length ? (
-        <Button
-          title="Add list"
-          onPress={handleSubmit}
-        />
-      )  : null}
+      {text.length ? <Button title="Add list" onPress={handleSubmit} /> : null}
     </View>
   );
 };
