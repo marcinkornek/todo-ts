@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Button, FlatList} from 'react-native';
+import {View, StyleSheet, Button, FlatList} from 'react-native';
 import {NavigationRouteProps, TodoItemType} from 'types';
 import {ListItem, ListSeparator} from 'components';
 

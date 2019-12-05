@@ -72,7 +72,7 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
   return produce(state, draft => {
     switch (action.type) {
       // LISTS
-      case types.ADD_TODO_LIST:
+      case types.ADD_TODO_LIST: {
         const {listKey, name} = action.payload;
         const newList = {
           key: listKey,
@@ -82,6 +82,7 @@ export const todosReducer = (state = initialState, action: TodosActionType) => {
         };
         draft.items = [...draft.items, newList];
         break;
+      }
       case types.TOGGLE_TODO_LIST: {
         const {listKey} = action.payload;
         const index = draft.items.findIndex(

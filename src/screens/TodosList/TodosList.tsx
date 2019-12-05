@@ -7,8 +7,6 @@ import {helpers} from 'utils';
 type Props = NavigationRouteProps & TodoItemType;
 
 const TodosList = ({
-  navigation,
-  route,
   listKey,
   todos,
   addTodo,

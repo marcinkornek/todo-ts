@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableOpacity, Text, TextInput, View} from 'react-native';
+import {TouchableOpacity, Text, View} from 'react-native';
 import {Icon} from 'native-base';
 import ListInput from '../ListInput/ListInput';
 import {TodoItemType} from 'types';
