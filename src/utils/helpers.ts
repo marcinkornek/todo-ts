@@ -7,8 +7,8 @@ type AlertButtonType = {
 };
 
 type BaseAlertTypes = {
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
 };
 
 type AlertTypes = BaseAlertTypes & {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationNativeContainer } from "@react-navigation/native";
-import { ActiveList, ArchivedList, TodosList } from 'screens';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationNativeContainer} from '@react-navigation/native';
+import {ActiveList, ArchivedList, TodosList} from 'screens';
 
 const Stack = createStackNavigator();
 
@@ -12,21 +12,21 @@ function RootNavigator() {
         <Stack.Screen
           name="ActiveList"
           component={ActiveList}
-          options={{ title: 'Active' }}
+          options={{title: 'Active'}}
         />
         <Stack.Screen
           name="ArchivedList"
           component={ArchivedList}
-          options={{ title: 'Archived' }}
+          options={{title: 'Archived'}}
         />
         <Stack.Screen
           name="TodosList"
           component={TodosList}
-          options={({ route }) => ({ title: route.params.title })}
+          options={({route}) => ({title: route.params.title})}
         />
       </Stack.Navigator>
     </NavigationNativeContainer>
   );
 }
 
-export default RootNavigator
+export default RootNavigator;

@@ -29,7 +29,9 @@ export type TodoItemType = {
 
 // REDUX
 export type TodosStateType = {
-  items: TodoListType[];
+  todos: {
+    items: TodoListType[];
+  };
 };
 
 export interface AddTodoListType extends Action {

@@ -39,7 +39,7 @@ const TodoItem = ({onToggle, onUpdate, onDelete, item}: Props) => {
   const viewTodo = () => (
     <TouchableOpacity
       onPress={handleCompletePress}
-      key={item.id || item.name}
+      key={item.key || item.name}
       style={styles.container}>
       <Text style={[styles.text, isCompleted && styles.textCompleted]}>
         {name}
